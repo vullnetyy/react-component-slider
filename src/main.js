@@ -3,25 +3,33 @@ import {render} from 'react-dom';
 
 import Slider from './Slider';
 
-let sliderProps = {
-
+const sampleDivStyle = {
+    width: '200px',
+    height: '350px',
+    display: 'inline-block',
+    position: 'relative'
 };
 
+function SampleDiv(props) {
+    return (
+        <div style={{...sampleDivStyle, backgroundColor: `rgb(200,${props.num * 15},${props.num * 20})`}}>
+            <div style={{position: 'absolute', top: '47%', left: '47%', fontSize: '30px'}}>
+                {props.num}
+            </div>
+        </div>
+    );
+}
 
+
+let children = [];
+for(let i=1; i<=10; i++){
+    children.push(<SampleDiv num={i} key={i} />);
+}
 
 render((
     <div style={{marginTop: '50px'}}>
         <Slider childWidth={200}>
-            <img src="http://placehold.it/200x300" style={{outline: '2px solid cyan'}} alt=""/>
-            <img src="http://placehold.it/200x300" style={{outline: '2px solid cyan'}} alt=""/>
-            <img src="http://placehold.it/200x300" style={{outline: '2px solid cyan'}} alt=""/>
-            <img src="http://placehold.it/200x300" style={{outline: '2px solid cyan'}} alt=""/>
-            <img src="http://placehold.it/200x300" style={{outline: '2px solid cyan'}} alt=""/>
-            <img src="http://placehold.it/200x300" style={{outline: '2px solid cyan'}} alt=""/>
-            <img src="http://placehold.it/200x300" style={{outline: '2px solid cyan'}} alt=""/>
-            <img src="http://placehold.it/200x300" style={{outline: '2px solid cyan'}} alt=""/>
-            <img src="http://placehold.it/200x300" style={{outline: '2px solid cyan'}} alt=""/>
-            <img src="http://placehold.it/200x300" style={{outline: '2px solid cyan'}} alt=""/>
+            {children}
         </Slider>
     </div>
 ), document.getElementById('react-app'));

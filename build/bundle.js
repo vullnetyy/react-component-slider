@@ -20728,7 +20728,12 @@ var sideNav = {
     zIndex: 2,
     background: 'rgba(255,255,255,0.7)',
     width: '100px',
-    height: '100%'
+    height: '100%',
+    cursor: 'pointer',
+    userSelect: 'none',
+    MozUserSelect: 'none',
+    WebkitUserSelect: 'none',
+    msUserSelect: 'none'
 };
 
 var navButton = {
@@ -20747,7 +20752,14 @@ var navButton = {
     fontSize: '40px' //only during development debug
 };
 
-var ChildCopies = function ChildCopies() {};
+var ChildCopies = function ChildCopies(props) {
+    return _react2['default'].createElement(
+        'div',
+        { style: { display: 'inline-block' } },
+        props.children,
+        props.children
+    );
+};
 
 var Slider = (function (_Component) {
     _inherits(Slider, _Component);
@@ -20759,9 +20771,13 @@ var Slider = (function (_Component) {
 
         this.onNavClick = this.onNavClick.bind(this);
         this.state = {
-            left: 0,
+            initialLeft: -(this.props.childWidth * this.props.children.length * 2),
             slideCount: 0
         };
+
+        this.state.left = this.state.initialLeft;
+        this.state.animationFlag = true;
+        this.clickWait = false;
     }
 
     /**
@@ -20772,74 +20788,117 @@ var Slider = (function (_Component) {
     _createClass(Slider, [{
         key: 'render',
         value: function render() {
-            var childWidth = this.props.childWidth;
-
-            var resetCondition = Math.abs(this.state.slideCount) % this.props.children.length === 0;
+            var _props = this.props;
+            var childWidth = _props.childWidth;
+            var children = _props.children;
+            var animationDelay = _props.animationDelay;
 
             var transform = 'translateX(' + this.state.left + 'px)';
-            var transition = resetCondition && 'none' || 'all .3s ease-in-out';
+            var transition = this.state.animationFlag && 'all .' + animationDelay + 's ease-in-out' || 'none';
 
             return _react2['default'].createElement(
                 'div',
                 { style: rootStyle },
                 _react2['default'].createElement(
                     'div',
-                    { style: _extends({}, sideNav, { top: 0, left: 0, width: childWidth }) },
+                    { style: _extends({}, sideNav, { top: 0, left: 0, width: childWidth }), onClick: this.onNavClick(_resources.SliderSide.LEFT) },
                     _react2['default'].createElement(
                         'a',
-                        { style: navButton, onClick: this.onNavClick(_resources.SliderSide.LEFT) },
+                        { style: navButton },
                         '+'
                     )
                 ),
                 _react2['default'].createElement(
                     'div',
                     { style: {
-                            width: this.props.children.length * childWidth + 'px',
+                            width: this.props.children.length * 5 * childWidth + 'px',
                             transform: transform,
                             transition: transition
                         } },
-                    this.props.children
+                    _react2['default'].createElement(ChildCopies, { children: children }),
+                    children,
+                    _react2['default'].createElement(ChildCopies, { children: children })
                 ),
                 _react2['default'].createElement(
                     'div',
-                    { style: _extends({}, sideNav, { top: 0, right: 0, width: childWidth }) },
+                    { style: _extends({}, sideNav, { top: 0, right: 0, width: childWidth }), onClick: this.onNavClick(_resources.SliderSide.RIGHT) },
                     _react2['default'].createElement(
                         'a',
-                        { style: navButton, onClick: this.onNavClick(_resources.SliderSide.RIGHT) },
+                        { style: navButton },
                         '+'
                     )
                 )
             );
         }
     }, {
-        key: 'onNavClick',
-        value: function onNavClick(side) {
+        key: 'componentDidUpdate',
+        value: function componentDidUpdate() {
             var _this = this;
 
+            if (!this.state.animationFlag) {
+                setTimeout(function () {
+                    _this.setState({
+                        animationFlag: true
+                    });
+                }, this.props.animationDelay);
+                return;
+            }
+
+            if (Math.abs(this.state.slideCount) === this.props.children.length) {
+                setTimeout(function () {
+
+                    _this.setState({
+                        left: _this.state.initialLeft,
+                        slideCount: 0,
+                        animationFlag: false
+                    });
+                }, this.props.animationDelay);
+            }
+        }
+
+        /**
+         * Partial application (curry) function. Also it does not allow consecutive execution before a delay expires
+         * @param side
+         * @returns {Function}
+         */
+    }, {
+        key: 'onNavClick',
+        value: function onNavClick(side) {
+            var _this2 = this;
+
             return function () {
-                switch (side) {
-                    case _resources.SliderSide.LEFT:
-                        _this.setState({
-                            left: _this.state.left - _this.props.childWidth,
-                            slideCount: _this.state.slideCount - 1
-                        });
+                if (_this2.state.animationFlag) {
+                    if (!_this2.clickWait) {
+                        setTimeout(function () {
+                            _this2.clickWait = false;
+                        }, _this2.props.animationDelay);
 
-                        if (Math.abs(_this.state.slideCount) % _this.props.children.length === 1) {
-                            _this.setState({ left: 0 });
-                        }
-                        break;
-                    case _resources.SliderSide.RIGHT:
-                        _this.setState({
-                            left: _this.state.left + _this.props.childWidth,
-                            slideCount: _this.state.slideCount + 1
-                        });
+                        _this2.navClick(side);
+                    }
 
-                        if (Math.abs(_this.state.slideCount) % _this.props.children.length === _this.props.children.length - 1) {
-                            _this.setState({ left: 0 });
-                        }
-                        break;
+                    _this2.clickWait = true;
                 }
             };
+        }
+    }, {
+        key: 'navClick',
+        value: function navClick(side) {
+            switch (side) {
+                case _resources.SliderSide.LEFT:
+                    this.setState({
+                        left: this.state.left - this.props.childWidth,
+                        slideCount: this.state.slideCount - 1
+                    });
+
+                    break;
+                case _resources.SliderSide.RIGHT:
+                    this.setState({
+                        left: this.state.left + this.props.childWidth,
+                        slideCount: this.state.slideCount + 1
+                    });
+
+                    break;
+            }
         }
     }]);
 
@@ -20850,11 +20909,17 @@ Slider.propTypes = {
     childWidth: _react.PropTypes.number
 };
 
+Slider.defaultProps = {
+    animationDelay: 300
+};
+
 exports['default'] = Slider;
 module.exports = exports['default'];
 
 },{"./resources":175,"react":172}],174:[function(require,module,exports){
 'use strict';
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
@@ -20868,7 +20933,29 @@ var _Slider = require('./Slider');
 
 var _Slider2 = _interopRequireDefault(_Slider);
 
-var sliderProps = {};
+var sampleDivStyle = {
+    width: '200px',
+    height: '350px',
+    display: 'inline-block',
+    position: 'relative'
+};
+
+function SampleDiv(props) {
+    return _react2['default'].createElement(
+        'div',
+        { style: _extends({}, sampleDivStyle, { backgroundColor: 'rgb(200,' + props.num * 15 + ',' + props.num * 20 + ')' }) },
+        _react2['default'].createElement(
+            'div',
+            { style: { position: 'absolute', top: '47%', left: '47%', fontSize: '30px' } },
+            props.num
+        )
+    );
+}
+
+var children = [];
+for (var i = 1; i <= 10; i++) {
+    children.push(_react2['default'].createElement(SampleDiv, { num: i, key: i }));
+}
 
 (0, _reactDom.render)(_react2['default'].createElement(
     'div',
@@ -20876,16 +20963,7 @@ var sliderProps = {};
     _react2['default'].createElement(
         _Slider2['default'],
         { childWidth: 200 },
-        _react2['default'].createElement('img', { src: 'http://placehold.it/200x300', style: { outline: '2px solid cyan' }, alt: '' }),
-        _react2['default'].createElement('img', { src: 'http://placehold.it/200x300', style: { outline: '2px solid cyan' }, alt: '' }),
-        _react2['default'].createElement('img', { src: 'http://placehold.it/200x300', style: { outline: '2px solid cyan' }, alt: '' }),
-        _react2['default'].createElement('img', { src: 'http://placehold.it/200x300', style: { outline: '2px solid cyan' }, alt: '' }),
-        _react2['default'].createElement('img', { src: 'http://placehold.it/200x300', style: { outline: '2px solid cyan' }, alt: '' }),
-        _react2['default'].createElement('img', { src: 'http://placehold.it/200x300', style: { outline: '2px solid cyan' }, alt: '' }),
-        _react2['default'].createElement('img', { src: 'http://placehold.it/200x300', style: { outline: '2px solid cyan' }, alt: '' }),
-        _react2['default'].createElement('img', { src: 'http://placehold.it/200x300', style: { outline: '2px solid cyan' }, alt: '' }),
-        _react2['default'].createElement('img', { src: 'http://placehold.it/200x300', style: { outline: '2px solid cyan' }, alt: '' }),
-        _react2['default'].createElement('img', { src: 'http://placehold.it/200x300', style: { outline: '2px solid cyan' }, alt: '' })
+        children
     )
 ), document.getElementById('react-app'));
 
