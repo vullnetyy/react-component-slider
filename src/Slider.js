@@ -32,8 +32,20 @@ const navButton = {
     MozUserSelect: 'none',
     WebkitUserSelect: 'none',
     msUserSelect: 'none',
-    textAlign: 'center',
-    fontSize: '40px' //only during development debug
+    backgroundSize: '90%',
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat'
+};
+
+const navButtonLeft = {
+    ...navButton,
+    backgroundImage: 'url(/assets/img/next.svg)',
+    transform: 'translate(-50%, -50%) rotate(180deg)'
+};
+
+const navButtonRight = {
+    ...navButton,
+    backgroundImage: 'url(/assets/img/next.svg)'
 };
 
 const ChildCopies = (props) => {
@@ -72,7 +84,7 @@ class Slider extends Component {
         return (
             <div style={{...rootStyle, height: childHeight}} ref="slider">
                 <div style={{...sideNav, top: 0, left: 0, width: childWidth}} onClick={this.onNavClick(SliderSide.LEFT)}>
-                    <a style={navButton}>+</a>
+                    <a style={navButtonLeft} />
                 </div>
 
                 <div style={{
@@ -88,7 +100,7 @@ class Slider extends Component {
                 </div>
 
                 <div style={{...sideNav, top: 0, right: 0, width: childWidth}} onClick={this.onNavClick(SliderSide.RIGHT)}>
-                    <a style={navButton}>+</a>
+                    <a style={navButtonRight} />
                 </div>
             </div>
         );

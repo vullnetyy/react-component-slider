@@ -20699,11 +20699,11 @@ Object.defineProperty(exports, '__esModule', {
     value: true
 });
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
 var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
@@ -20748,9 +20748,19 @@ var navButton = {
     MozUserSelect: 'none',
     WebkitUserSelect: 'none',
     msUserSelect: 'none',
-    textAlign: 'center',
-    fontSize: '40px' //only during development debug
+    backgroundSize: '90%',
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat'
 };
+
+var navButtonLeft = _extends({}, navButton, {
+    backgroundImage: 'url(/assets/img/next.svg)',
+    transform: 'translate(-50%, -50%) rotate(180deg)'
+});
+
+var navButtonRight = _extends({}, navButton, {
+    backgroundImage: 'url(/assets/img/next.svg)'
+});
 
 var ChildCopies = function ChildCopies(props) {
     return _react2['default'].createElement(
@@ -20801,11 +20811,7 @@ var Slider = (function (_Component) {
                 _react2['default'].createElement(
                     'div',
                     { style: _extends({}, sideNav, { top: 0, left: 0, width: childWidth }), onClick: this.onNavClick(_resources.SliderSide.LEFT) },
-                    _react2['default'].createElement(
-                        'a',
-                        { style: navButton },
-                        '+'
-                    )
+                    _react2['default'].createElement('a', { style: navButtonLeft })
                 ),
                 _react2['default'].createElement(
                     'div',
@@ -20825,11 +20831,7 @@ var Slider = (function (_Component) {
                 _react2['default'].createElement(
                     'div',
                     { style: _extends({}, sideNav, { top: 0, right: 0, width: childWidth }), onClick: this.onNavClick(_resources.SliderSide.RIGHT) },
-                    _react2['default'].createElement(
-                        'a',
-                        { style: navButton },
-                        '+'
-                    )
+                    _react2['default'].createElement('a', { style: navButtonRight })
                 )
             );
         }
