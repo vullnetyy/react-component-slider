@@ -20771,34 +20771,33 @@ var Slider = (function (_Component) {
 
         this.onNavClick = this.onNavClick.bind(this);
         this.state = {
-            initialLeft: -(this.props.childWidth * this.props.children.length * 2),
-            slideCount: 0
+            slideCount: 0,
+            childWidth: 150,
+            childHeight: 1
         };
 
+        this.state.initialLeft = 0;
         this.state.left = this.state.initialLeft;
         this.state.animationFlag = true;
         this.clickWait = false;
     }
 
-    /**
-     *
-     * @type {{childWidth}} - the width of a single child that will be housed within the slider in pixels
-     */
-
     _createClass(Slider, [{
         key: 'render',
         value: function render() {
             var _props = this.props;
-            var childWidth = _props.childWidth;
             var children = _props.children;
             var animationDelay = _props.animationDelay;
+            var _state = this.state;
+            var childWidth = _state.childWidth;
+            var childHeight = _state.childHeight;
 
             var transform = 'translateX(' + this.state.left + 'px)';
             var transition = this.state.animationFlag && 'all .' + animationDelay + 's ease-in-out' || 'none';
 
             return _react2['default'].createElement(
                 'div',
-                { style: rootStyle },
+                { style: _extends({}, rootStyle, { height: childHeight }), ref: 'slider' },
                 _react2['default'].createElement(
                     'div',
                     { style: _extends({}, sideNav, { top: 0, left: 0, width: childWidth }), onClick: this.onNavClick(_resources.SliderSide.LEFT) },
@@ -20816,7 +20815,11 @@ var Slider = (function (_Component) {
                             transition: transition
                         } },
                     _react2['default'].createElement(ChildCopies, { children: children }),
-                    children,
+                    _react2['default'].createElement(
+                        'div',
+                        { className: 'children-container', style: { display: 'inline-block' } },
+                        children
+                    ),
                     _react2['default'].createElement(ChildCopies, { children: children })
                 ),
                 _react2['default'].createElement(
@@ -20829,6 +20832,21 @@ var Slider = (function (_Component) {
                     )
                 )
             );
+        }
+    }, {
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            var childWidth = this.refs.slider.querySelector(".children-container > div").offsetWidth;
+            var childHeight = this.refs.slider.querySelector(".children-container > div").offsetHeight;
+            var initialLeft = -(childWidth * this.props.children.length * 2);
+
+            this.setState({
+                initialLeft: initialLeft,
+                left: initialLeft,
+                childWidth: childWidth,
+                childHeight: childHeight,
+                animationFlag: false
+            });
         }
     }, {
         key: 'componentDidUpdate',
@@ -20883,17 +20901,18 @@ var Slider = (function (_Component) {
     }, {
         key: 'navClick',
         value: function navClick(side) {
+            console.log(this.state.childWidth, 'navClick'); //debug
             switch (side) {
                 case _resources.SliderSide.LEFT:
                     this.setState({
-                        left: this.state.left - this.props.childWidth,
+                        left: this.state.left - this.state.childWidth,
                         slideCount: this.state.slideCount - 1
                     });
 
                     break;
                 case _resources.SliderSide.RIGHT:
                     this.setState({
-                        left: this.state.left + this.props.childWidth,
+                        left: this.state.left + this.state.childWidth,
                         slideCount: this.state.slideCount + 1
                     });
 
@@ -20905,12 +20924,10 @@ var Slider = (function (_Component) {
     return Slider;
 })(_react.Component);
 
-Slider.propTypes = {
-    childWidth: _react.PropTypes.number
-};
+Slider.propTypes = {};
 
 Slider.defaultProps = {
-    animationDelay: 300
+    animationDelay: 200
 };
 
 exports['default'] = Slider;
@@ -20962,7 +20979,7 @@ for (var i = 1; i <= 10; i++) {
     { style: { marginTop: '50px' } },
     _react2['default'].createElement(
         _Slider2['default'],
-        { childWidth: 200 },
+        null,
         children
     )
 ), document.getElementById('react-app'));

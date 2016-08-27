@@ -28,7 +28,7 @@ for(let i=1; i<=10; i++){
 
 render((
     <div style={{marginTop: '50px'}}>
-        <Slider childWidth={200}>
+        <Slider>
             {children}
         </Slider>
     </div>

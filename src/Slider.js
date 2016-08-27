@@ -51,23 +51,26 @@ class Slider extends Component {
 
         this.onNavClick = this.onNavClick.bind(this);
         this.state = {
-            initialLeft: -(this.props.childWidth * this.props.children.length * 2),
-            slideCount: 0
+            slideCount: 0,
+            childWidth: 150,
+            childHeight: 1
         };
 
+        this.state.initialLeft = 0;
         this.state.left = this.state.initialLeft;
         this.state.animationFlag = true;
         this.clickWait = false;
     }
 
     render() {
-        let {childWidth, children, animationDelay} = this.props;
+        let {children, animationDelay} = this.props;
+        let {childWidth, childHeight} = this.state;
 
         let transform = `translateX(${this.state.left}px)`;
         let transition = this.state.animationFlag && `all .${animationDelay}s ease-in-out` || 'none';
 
         return (
-            <div style={rootStyle}>
+            <div style={{...rootStyle, height: childHeight}} ref="slider">
                 <div style={{...sideNav, top: 0, left: 0, width: childWidth}} onClick={this.onNavClick(SliderSide.LEFT)}>
                     <a style={navButton}>+</a>
                 </div>
@@ -78,7 +81,9 @@ class Slider extends Component {
                     transition
                 }}>
                     <ChildCopies children={children}/>
-                    {children}
+                    <div className="children-container" style={{display: 'inline-block'}}>
+                        {children}
+                    </div>
                     <ChildCopies children={children}/>
                 </div>
 
@@ -88,6 +93,20 @@ class Slider extends Component {
             </div>
         );
     }
+
+    componentDidMount(){
+        let childWidth = this.refs.slider.querySelector(".children-container > div").offsetWidth;
+        let childHeight = this.refs.slider.querySelector(".children-container > div").offsetHeight;
+        let initialLeft = -(childWidth * this.props.children.length * 2);
+
+        this.setState({
+            initialLeft,
+            left: initialLeft,
+            childWidth,
+            childHeight,
+            animationFlag: false
+        });
+    };
 
     componentDidUpdate(){
         if(!this.state.animationFlag){
@@ -133,18 +152,22 @@ class Slider extends Component {
         }
     }
 
+
+
+
     navClick(side){
+        console.log(this.state.childWidth, 'navClick'); //debug
         switch(side){
             case SliderSide.LEFT:
                 this.setState({
-                    left: this.state.left - this.props.childWidth,
+                    left: this.state.left - this.state.childWidth,
                     slideCount: this.state.slideCount - 1
                 });
 
                 break;
             case SliderSide.RIGHT:
                 this.setState({
-                    left: this.state.left + this.props.childWidth,
+                    left: this.state.left + this.state.childWidth,
                     slideCount: this.state.slideCount + 1
                 });
 
@@ -153,16 +176,12 @@ class Slider extends Component {
     }
 }
 
-/**
- *
- * @type {{childWidth}} - the width of a single child that will be housed within the slider in pixels
- */
 Slider.propTypes = {
-    childWidth: PropTypes.number
+
 };
 
 Slider.defaultProps = {
-    animationDelay: 300
+    animationDelay: 200
 };
 
 export default Slider;
