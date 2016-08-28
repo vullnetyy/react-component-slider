@@ -36,6 +36,7 @@
     "grunt-sass": "^1.2.0"
   },
   "dependencies": {
+    "invariant": "^2.2.1",
     "keymirror": "^0.1.1",
     "react": "^15.3.0",
     "react-dom": "^15.3.0"
