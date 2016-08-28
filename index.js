@@ -243,4 +243,3 @@ Slider.defaultProps = {
 };
 
 exports.default = Slider;
-module.exports = Slider;

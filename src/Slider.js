@@ -1,6 +1,7 @@
 import "babel-polyfill";
 import React, {PropTypes, Component} from 'react';
 import {SliderSide} from './resources';
+import 'babel-polyfill';
 
 const rootStyle = {
     width:'100%',
