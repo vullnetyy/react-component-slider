@@ -1,7 +1,10 @@
-import "babel-polyfill";
 import React, {PropTypes, Component} from 'react';
-import {SliderSide} from './resources';
-import 'babel-polyfill';
+import keymirror from 'keymirror';
+
+const SliderSide = keymirror({
+    LEFT: null,
+    RIGHT: null
+});
 
 const rootStyle = {
     width:'100%',
@@ -170,7 +173,6 @@ class Slider extends Component {
 
 
     navClick(side){
-        console.log(this.state.childWidth, 'navClick'); //debug
         switch(side){
             case SliderSide.LEFT:
                 this.setState({

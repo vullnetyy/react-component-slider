@@ -9,7 +9,8 @@
     "build_dev": "SET NODE_ENV=development && grunt",
     "watch": "SET NODE_ENV=development && grunt watch",
     "start": "node app",
-    "prepublish": "babel src/Slider.js -o index.js",
+    "build": "babel src/Slider.js -o transpiled.js",
+    "prepublish": "browserify transpiled.js -o index.js",
     "old_prepublish": "browserify src/Slider.js -o index.js -t [ babelify --presets [ es2015 react stage-2 ] ]"
   },
   "repository": {
