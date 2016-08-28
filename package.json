@@ -1,5 +1,5 @@
 {
-  "name": "shitjeb2b",
+  "name": "react-image-slider",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -13,10 +13,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://dyla@bitbucket.org/dyla/shitjeb2b.git"
+    "url": "git+https://github.com/vullnetyy/react-image-slider.git"
   },
   "author": "Vullnet Dyla",
-  "license": "GNU",
+  "license": "GPL-3.0",
   "homepage": "https://bitbucket.org/dyla/shitjeb2b#readme",
   "devDependencies": {
     "babel-preset-es2015": "^6.14.0",
