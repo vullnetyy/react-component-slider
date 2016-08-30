@@ -10,7 +10,7 @@
     "watch": "SET NODE_ENV=development && grunt watch",
     "start": "node app",
     "build": "babel src/Slider.js -o transpiled.js",
-    "prepublish": "browserify transpiled.js > index.js"
+    "prepublish": "browserify transpiled.js > index.js && grunt uglify"
   },
   "repository": {
     "type": "git",
