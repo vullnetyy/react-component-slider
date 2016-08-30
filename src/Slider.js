@@ -1,5 +1,6 @@
 import React, {PropTypes, Component} from 'react';
 import keymirror from 'keymirror';
+import 'babel-polyfill';
 
 const SliderSide = keymirror({
     LEFT: null,
