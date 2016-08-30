@@ -20,7 +20,7 @@ module.exports = function(grunt) {
         uglify: {
             static_mappings: {
                 files: [
-                    {src: 'index.js', dest: 'index.js'}
+                    {src: 'index.js', dest: 'index.min.js'}
                 ]
             }
         }

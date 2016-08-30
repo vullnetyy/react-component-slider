@@ -202,3 +202,4 @@ Slider.defaultProps = {
 };
 
 export default Slider;
+

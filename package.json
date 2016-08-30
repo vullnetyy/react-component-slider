@@ -2,7 +2,7 @@
   "name": "react-image-slider",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "index.min.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "release": "SET NODE_ENV=production && grunt release",
@@ -10,7 +10,7 @@
     "watch": "SET NODE_ENV=development && grunt watch",
     "start": "node app",
     "build": "babel src/Slider.js -o transpiled.js",
-    "prepublish": "browserify transpiled.js > index.js && grunt uglify"
+    "prepublish": "babel src/Slider.js -o transpiled.js && browserify transpiled.js > index.js && grunt uglify"
   },
   "repository": {
     "type": "git",
@@ -21,6 +21,7 @@
   "homepage": "https://bitbucket.org/dyla/shitjeb2b#readme",
   "devDependencies": {
     "babel-cli": "^6.14.0",
+    "babel-plugin-add-module-exports": "^0.2.1",
     "babel-polyfill": "^6.13.0",
     "babel-preset-es2015": "^6.14.0",
     "babel-preset-react": "^6.11.1",
