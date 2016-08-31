@@ -44,13 +44,13 @@ const navButton = {
 
 const navButtonLeft = {
     ...navButton,
-    backgroundImage: 'url(/assets/img/next.svg)',
+    backgroundImage: 'url(../assets/img/next.svg)',
     transform: 'translate(-50%, -50%) rotate(180deg)'
 };
 
 const navButtonRight = {
     ...navButton,
-    backgroundImage: 'url(/assets/img/next.svg)'
+    backgroundImage: 'url(../assets/img/next.svg)'
 };
 
 const ChildCopies = (props) => {
