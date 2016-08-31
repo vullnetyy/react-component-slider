@@ -1,1 +1,1 @@
-module.exports = require('./index.min.js');
+module.exports = require('./lib/Slider.js');

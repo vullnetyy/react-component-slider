@@ -9,8 +9,8 @@
     "build_dev": "SET NODE_ENV=development && grunt",
     "watch": "SET NODE_ENV=development && grunt watch",
     "start": "node app",
-    "build": "babel src --out-dir lib",
-    "prepublish": "npm run build && browserify lib/Slider.js > index.js && grunt uglify"
+    "prepublish": "babel src --out-dir lib",
+    "old_prepublish": "npm run build && browserify lib/Slider.js > index.js && grunt uglify"
   },
   "repository": {
     "type": "git",
