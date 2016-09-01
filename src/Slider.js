@@ -88,7 +88,7 @@ class Slider extends Component {
 
         return (
             <div style={{...rootStyle, height: childHeight}} ref="slider">
-                <div style={{...sideNav, top: 0, left: 0, width: childWidth}} onClick={this.onNavClick(SliderSide.LEFT)}>
+                <div style={{...sideNav, top: 0, left: 0, width: childWidth}} onClick={this.onNavClick(SliderSide.RIGHT)}>
                     <img src={`data:image/svg+xml;utf-8,${arrowImg}`} style={navButtonLeft} />
                 </div>
 
@@ -104,7 +104,7 @@ class Slider extends Component {
                     <ChildCopies children={children}/>
                 </div>
 
-                <div style={{...sideNav, top: 0, right: 0, width: childWidth}} onClick={this.onNavClick(SliderSide.RIGHT)}>
+                <div style={{...sideNav, top: 0, right: 0, width: childWidth}} onClick={this.onNavClick(SliderSide.LEFT)}>
                     <img src={`data:image/svg+xml;utf-8,${arrowImg}`} style={navButtonRight} />
                 </div>
             </div>
