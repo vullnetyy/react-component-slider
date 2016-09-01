@@ -112,19 +112,18 @@ class Slider extends Component {
     }
 
     componentDidMount(){
-        if(!this.props.childWidth){
-            let childWidth = this.refs.slider.querySelector(".children-container > div").offsetWidth;
-            let childHeight = this.refs.slider.querySelector(".children-container > div").offsetHeight;
-            let initialLeft = -(childWidth * this.props.children.length * 2);
 
-            this.setState({
-                initialLeft,
-                left: initialLeft,
-                childWidth,
-                childHeight,
-                animationFlag: false
-            });
-        }
+        let childWidth = this.props.childWidth || this.refs.slider.querySelector(".children-container > div").offsetWidth;
+        let childHeight = this.refs.slider.querySelector(".children-container > div").offsetHeight;
+        let initialLeft = -(childWidth * this.props.children.length * 2);
+
+        this.setState({
+            initialLeft,
+            left: initialLeft,
+            childWidth,
+            childHeight,
+            animationFlag: false
+        });
     };
 
     componentDidUpdate(){
