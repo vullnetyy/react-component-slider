@@ -1,8 +1,7 @@
 import React, {PropTypes, Component} from 'react';
 import keymirror from 'keymirror';
 
-const fs = require('fs');
-const arrowImg = fs.readFileSync(__dirname + '/../assets/img/next.svg', 'utf8');
+const arrowImg = "<?xml version=\"1.0\" encoding=\"iso-8859-1\"?>\n<!-- Generator: Adobe Illustrator 19.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->\n<svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" version=\"1.1\" id=\"Capa_1\" x=\"0px\" y=\"0px\" viewBox=\"0 0 477.175 477.175\" style=\"enable-background:new 0 0 477.175 477.175;\" xml:space=\"preserve\" width=\"512px\" height=\"512px\">\n<g>\n\t<path d=\"M360.731,229.075l-225.1-225.1c-5.3-5.3-13.8-5.3-19.1,0s-5.3,13.8,0,19.1l215.5,215.5l-215.5,215.5   c-5.3,5.3-5.3,13.8,0,19.1c2.6,2.6,6.1,4,9.5,4c3.4,0,6.9-1.3,9.5-4l225.1-225.1C365.931,242.875,365.931,234.275,360.731,229.075z   \" fill=\"#006DF0\"/>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n</svg>";
 
 const SliderSide = keymirror({
     LEFT: null,
@@ -90,7 +89,7 @@ class Slider extends Component {
         return (
             <div style={{...rootStyle, height: childHeight}} ref="slider">
                 <div style={{...sideNav, top: 0, left: 0, width: childWidth}} onClick={this.onNavClick(SliderSide.LEFT)}>
-                    <img src={`data:image/png;base64,${arrowImg}`} style={navButtonLeft} />
+                    <img src={`data:image/svg+xml;utf-8,${arrowImg}`} style={navButtonLeft} />
                 </div>
 
                 <div style={{
@@ -106,7 +105,7 @@ class Slider extends Component {
                 </div>
 
                 <div style={{...sideNav, top: 0, right: 0, width: childWidth}} onClick={this.onNavClick(SliderSide.RIGHT)}>
-                    <img src={`data:image/png;base64,${arrowImg}`} style={navButtonRight} />
+                    <img src={`data:image/svg+xml;utf-8,${arrowImg}`} style={navButtonRight} />
                 </div>
             </div>
         );
@@ -202,4 +201,3 @@ Slider.defaultProps = {
 };
 
 export default Slider;
-

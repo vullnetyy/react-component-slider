@@ -3,13 +3,16 @@
   "version": "0.1.0",
   "description": "",
   "main": "main.js",
+  "browserify": {
+    "transform": [ "brfs" ]
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "release": "SET NODE_ENV=production && grunt release",
     "build_dev": "SET NODE_ENV=development && grunt",
     "watch": "SET NODE_ENV=development && grunt watch",
     "start": "node app",
-    "prepublish": "babel src --out-dir lib",
+    "prepublish": "babel src --out-file lib/Slider.js",
     "old_prepublish": "npm run build && browserify lib/Slider.js > index.js && grunt uglify"
   },
   "repository": {

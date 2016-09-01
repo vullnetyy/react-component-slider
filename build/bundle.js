@@ -20762,6 +20762,10 @@ var _keymirror = require('keymirror');
 
 var _keymirror2 = _interopRequireDefault(_keymirror);
 
+var _arrowImg = require('./arrowImg');
+
+var _arrowImg2 = _interopRequireDefault(_arrowImg);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -20769,6 +20773,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+console.log(_arrowImg2.default); //debug
 
 var SliderSide = (0, _keymirror2.default)({
     LEFT: null,
@@ -20812,13 +20818,10 @@ var navButton = {
 };
 
 var navButtonLeft = _extends({}, navButton, {
-    backgroundImage: 'url(../assets/img/next.svg)',
     transform: 'translate(-50%, -50%) rotate(180deg)'
 });
 
-var navButtonRight = _extends({}, navButton, {
-    backgroundImage: 'url(../assets/img/next.svg)'
-});
+var navButtonRight = _extends({}, navButton);
 
 var ChildCopies = function ChildCopies(props) {
     return _react2.default.createElement(
@@ -20871,7 +20874,7 @@ var Slider = function (_Component) {
                 _react2.default.createElement(
                     'div',
                     { style: _extends({}, sideNav, { top: 0, left: 0, width: childWidth }), onClick: this.onNavClick(SliderSide.LEFT) },
-                    _react2.default.createElement('a', { style: navButtonLeft })
+                    _react2.default.createElement('img', { src: 'data:image/svg+xml;utf-8,' + _arrowImg2.default, style: navButtonLeft })
                 ),
                 _react2.default.createElement(
                     'div',
@@ -20891,7 +20894,7 @@ var Slider = function (_Component) {
                 _react2.default.createElement(
                     'div',
                     { style: _extends({}, sideNav, { top: 0, right: 0, width: childWidth }), onClick: this.onNavClick(SliderSide.RIGHT) },
-                    _react2.default.createElement('a', { style: navButtonRight })
+                    _react2.default.createElement('img', { src: 'data:image/svg+xml;utf-8,' + _arrowImg2.default, style: navButtonRight })
                 )
             );
         }
@@ -20995,4 +20998,13 @@ Slider.defaultProps = {
 exports.default = Slider;
 module.exports = exports['default'];
 
-},{"keymirror":27,"react":173}]},{},[1]);
+},{"./arrowImg":175,"keymirror":27,"react":173}],175:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports.default = "<?xml version=\"1.0\" encoding=\"iso-8859-1\"?>\n<!-- Generator: Adobe Illustrator 19.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->\n<svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" version=\"1.1\" id=\"Capa_1\" x=\"0px\" y=\"0px\" viewBox=\"0 0 477.175 477.175\" style=\"enable-background:new 0 0 477.175 477.175;\" xml:space=\"preserve\" width=\"512px\" height=\"512px\">\n<g>\n\t<path d=\"M360.731,229.075l-225.1-225.1c-5.3-5.3-13.8-5.3-19.1,0s-5.3,13.8,0,19.1l215.5,215.5l-215.5,215.5   c-5.3,5.3-5.3,13.8,0,19.1c2.6,2.6,6.1,4,9.5,4c3.4,0,6.9-1.3,9.5-4l225.1-225.1C365.931,242.875,365.931,234.275,360.731,229.075z   \" fill=\"#006DF0\"/>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n</svg>";
+module.exports = exports["default"];
+
+},{}]},{},[1]);
