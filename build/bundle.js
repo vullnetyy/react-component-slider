@@ -20812,12 +20812,12 @@ var navButton = {
 };
 
 var navButtonLeft = _extends({}, navButton, {
-    backgroundImage: 'url(/assets/img/next.svg)',
+    backgroundImage: 'url(../assets/img/next.svg)',
     transform: 'translate(-50%, -50%) rotate(180deg)'
 });
 
 var navButtonRight = _extends({}, navButton, {
-    backgroundImage: 'url(/assets/img/next.svg)'
+    backgroundImage: 'url(../assets/img/next.svg)'
 });
 
 var ChildCopies = function ChildCopies(props) {
@@ -20993,5 +20993,6 @@ Slider.defaultProps = {
 };
 
 exports.default = Slider;
+module.exports = exports['default'];
 
 },{"keymirror":27,"react":173}]},{},[1]);
