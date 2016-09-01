@@ -27,6 +27,7 @@
     "babel-preset-react": "^6.11.1",
     "babel-preset-stage-2": "^6.13.0",
     "babelify": "7.3.0",
+    "brfs": "^1.4.3",
     "express": "^4.14.0",
     "grunt": "0.4.5",
     "grunt-browserify": "3.6.0",
