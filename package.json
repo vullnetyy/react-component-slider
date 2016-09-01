@@ -14,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vullnetyy/react-image-slider.git"
+    "url": "git+https://github.com/vullnetyy/react-component-slider.git"
   },
   "author": "Vullnet Dyla",
   "license": "GPL-3.0",
