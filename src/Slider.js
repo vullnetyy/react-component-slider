@@ -112,17 +112,19 @@ class Slider extends Component {
     }
 
     componentDidMount(){
-        let childWidth = this.refs.slider.querySelector(".children-container > div").offsetWidth;
-        let childHeight = this.refs.slider.querySelector(".children-container > div").offsetHeight;
-        let initialLeft = -(childWidth * this.props.children.length * 2);
+        if(!this.props.childWidth){
+            let childWidth = this.refs.slider.querySelector(".children-container > div").offsetWidth;
+            let childHeight = this.refs.slider.querySelector(".children-container > div").offsetHeight;
+            let initialLeft = -(childWidth * this.props.children.length * 2);
 
-        this.setState({
-            initialLeft,
-            left: initialLeft,
-            childWidth,
-            childHeight,
-            animationFlag: false
-        });
+            this.setState({
+                initialLeft,
+                left: initialLeft,
+                childWidth,
+                childHeight,
+                animationFlag: false
+            });
+        }
     };
 
     componentDidUpdate(){
@@ -193,7 +195,8 @@ class Slider extends Component {
 }
 
 Slider.propTypes = {
-
+    childWidth: PropTypes.number,
+    animationDelay: PropTypes.number
 };
 
 Slider.defaultProps = {
