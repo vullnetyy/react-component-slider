@@ -20762,10 +20762,6 @@ var _keymirror = require('keymirror');
 
 var _keymirror2 = _interopRequireDefault(_keymirror);
 
-var _arrowImg = require('./arrowImg');
-
-var _arrowImg2 = _interopRequireDefault(_arrowImg);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -20774,7 +20770,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-console.log(_arrowImg2.default); //debug
+var arrowImg = "<?xml version=\"1.0\" encoding=\"iso-8859-1\"?>\n<!-- Generator: Adobe Illustrator 19.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->\n<svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" version=\"1.1\" id=\"Capa_1\" x=\"0px\" y=\"0px\" viewBox=\"0 0 477.175 477.175\" style=\"enable-background:new 0 0 477.175 477.175;\" xml:space=\"preserve\" width=\"512px\" height=\"512px\">\n<g>\n\t<path d=\"M360.731,229.075l-225.1-225.1c-5.3-5.3-13.8-5.3-19.1,0s-5.3,13.8,0,19.1l215.5,215.5l-215.5,215.5   c-5.3,5.3-5.3,13.8,0,19.1c2.6,2.6,6.1,4,9.5,4c3.4,0,6.9-1.3,9.5-4l225.1-225.1C365.931,242.875,365.931,234.275,360.731,229.075z   \" fill=\"#006DF0\"/>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n</svg>";
 
 var SliderSide = (0, _keymirror2.default)({
     LEFT: null,
@@ -20873,8 +20869,8 @@ var Slider = function (_Component) {
                 { style: _extends({}, rootStyle, { height: childHeight }), ref: 'slider' },
                 _react2.default.createElement(
                     'div',
-                    { style: _extends({}, sideNav, { top: 0, left: 0, width: childWidth }), onClick: this.onNavClick(SliderSide.LEFT) },
-                    _react2.default.createElement('img', { src: 'data:image/svg+xml;utf-8,' + _arrowImg2.default, style: navButtonLeft })
+                    { style: _extends({}, sideNav, { top: 0, left: 0, width: childWidth / 2 }), onClick: this.onNavClick(SliderSide.RIGHT) },
+                    _react2.default.createElement('img', { src: 'data:image/svg+xml;utf-8,' + arrowImg, style: navButtonLeft })
                 ),
                 _react2.default.createElement(
                     'div',
@@ -20893,15 +20889,16 @@ var Slider = function (_Component) {
                 ),
                 _react2.default.createElement(
                     'div',
-                    { style: _extends({}, sideNav, { top: 0, right: 0, width: childWidth }), onClick: this.onNavClick(SliderSide.RIGHT) },
-                    _react2.default.createElement('img', { src: 'data:image/svg+xml;utf-8,' + _arrowImg2.default, style: navButtonRight })
+                    { style: _extends({}, sideNav, { top: 0, right: 0, width: childWidth / 2 }), onClick: this.onNavClick(SliderSide.LEFT) },
+                    _react2.default.createElement('img', { src: 'data:image/svg+xml;utf-8,' + arrowImg, style: navButtonRight })
                 )
             );
         }
     }, {
         key: 'componentDidMount',
         value: function componentDidMount() {
-            var childWidth = this.refs.slider.querySelector(".children-container > div").offsetWidth;
+
+            var childWidth = this.props.childWidth || this.refs.slider.querySelector(".children-container > div").offsetWidth;
             var childHeight = this.refs.slider.querySelector(".children-container > div").offsetHeight;
             var initialLeft = -(childWidth * this.props.children.length * 2);
 
@@ -20989,7 +20986,10 @@ var Slider = function (_Component) {
     return Slider;
 }(_react.Component);
 
-Slider.propTypes = {};
+Slider.propTypes = {
+    childWidth: _react.PropTypes.number,
+    animationDelay: _react.PropTypes.number
+};
 
 Slider.defaultProps = {
     animationDelay: 200
@@ -20998,13 +20998,4 @@ Slider.defaultProps = {
 exports.default = Slider;
 module.exports = exports['default'];
 
-},{"./arrowImg":175,"keymirror":27,"react":173}],175:[function(require,module,exports){
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-exports.default = "<?xml version=\"1.0\" encoding=\"iso-8859-1\"?>\n<!-- Generator: Adobe Illustrator 19.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->\n<svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" version=\"1.1\" id=\"Capa_1\" x=\"0px\" y=\"0px\" viewBox=\"0 0 477.175 477.175\" style=\"enable-background:new 0 0 477.175 477.175;\" xml:space=\"preserve\" width=\"512px\" height=\"512px\">\n<g>\n\t<path d=\"M360.731,229.075l-225.1-225.1c-5.3-5.3-13.8-5.3-19.1,0s-5.3,13.8,0,19.1l215.5,215.5l-215.5,215.5   c-5.3,5.3-5.3,13.8,0,19.1c2.6,2.6,6.1,4,9.5,4c3.4,0,6.9-1.3,9.5-4l225.1-225.1C365.931,242.875,365.931,234.275,360.731,229.075z   \" fill=\"#006DF0\"/>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n</svg>";
-module.exports = exports["default"];
-
-},{}]},{},[1]);
+},{"keymirror":27,"react":173}]},{},[1]);
